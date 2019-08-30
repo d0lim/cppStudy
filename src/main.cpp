@@ -1,11 +1,16 @@
 #include <iostream>
 
-using namespace std;
+int getSquare(int arg);
 
 int main() {
-	// cout << "Hello, World!!" << endl;
-	std::cout << "hi" << std::endl
-          << "my name is "
-          << "Psi" << std::endl;
+	int i;
+	
+	std::cout << "Input : ";
+	std::cin >> i;
+	std::cout << getSquare(i) << std::endl;
     return 0;
+}
+
+int getSquare(int arg) {
+	return arg * arg;
 }
