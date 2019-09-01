@@ -1,23 +1,31 @@
 #include <iostream>
 
 
+class Animal {
+	private:
+	int food;
+	int weight;
+	
+	public:
+	void setAnimal(int _food, int _weight) {
+		food = _food;
+		weight = _weight;
+	}
+	void increaseFood(int feed) {
+		food += feed;
+		weight += (feed / 3);
+	}
+	void viewStat() {
+		std::cout << "This animal has " << food << " food" << std::endl;
+		std::cout << "This animal's weight is " << weight <<  std::endl;
+	}
+}; // Do not forget semicolon !!
 
 int main() {
-	int arrSize;
+	Animal animal;
+	animal.setAnimal(100, 50);
+	animal.increaseFood(30);
 	
-	std::cout << "Input arr size : ";
-	std::cin >> arrSize;
-	
-	int *list = new int[arrSize];
-	for (int i = 0; i < arrSize; i++) {
-		std::cout << "Input " << i + 1 << " index data : ";
-		std::cin >> list[i];
-	}
-	for (int i = 0; i < arrSize; i++) {
-		std::cout << "Data of " << i + 1 << " index is : " << list[i] << std::endl;
-	}
-	
-	delete[] list;
-    return 0;
+	animal.viewStat();
+	return 0;
 }
-
