@@ -1,16 +1,23 @@
 #include <iostream>
 
-int getSquare(int arg);
+
 
 int main() {
-	int i;
+	int arrSize;
 	
-	std::cout << "Input : ";
-	std::cin >> i;
-	std::cout << getSquare(i) << std::endl;
+	std::cout << "Input arr size : ";
+	std::cin >> arrSize;
+	
+	int *list = new int[arrSize];
+	for (int i = 0; i < arrSize; i++) {
+		std::cout << "Input " << i + 1 << " index data : ";
+		std::cin >> list[i];
+	}
+	for (int i = 0; i < arrSize; i++) {
+		std::cout << "Data of " << i + 1 << " index is : " << list[i] << std::endl;
+	}
+	
+	delete[] list;
     return 0;
 }
 
-int getSquare(int arg) {
-	return arg * arg;
-}
