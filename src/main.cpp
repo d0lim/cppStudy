@@ -19,7 +19,7 @@ class Animal {
 		std::cout << "This animal has " << food << " food" << std::endl;
 		std::cout << "This animal's weight is " << weight <<  std::endl;
 	}
-}; // Do not forget semicolon !!
+}; // Do not forget semicolon !!!
 
 int main() {
 	Animal animal;
@@ -29,3 +29,4 @@ int main() {
 	animal.viewStat();
 	return 0;
 }
+
