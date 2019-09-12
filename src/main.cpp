@@ -9,6 +9,12 @@ public:
 	Complex operator-(const Complex &c);
 	Complex operator*(const Complex &c);
 	Complex operator/(const Complex &c);
+	
+	Complex operator+=(const Complex &c);
+	Complex operator-=(const Complex &c);
+	Complex operator*=(const Complex &c);
+	Complex operator/=(const Complex &c);
+	
 	Complex& operator=(const Complex &c);
 	void println();
 };
@@ -32,6 +38,24 @@ Complex Complex::operator/(const Complex &c) {
     (img * c.real - real * c.img) / (c.real * c.real + c.img * c.img));
 	return temp;
 }
+
+Complex Complex::operator+=(const Complex &c){
+	(*this) = (*this) + c;
+	return *this;
+}
+Complex Complex::operator-=(const Complex &c){
+	(*this) = (*this) - c;
+	return (*this);
+}
+Complex Complex::operator*=(const Complex &c){
+	(*this) = (*this) * c;
+	return (*this);
+}
+Complex Complex::operator/=(const Complex &c){
+	(*this) = (*this) / c;
+	return (*this);
+}
+
 Complex& Complex::operator=(const Complex &c) {
 	real = c.real;
 	img = c.img;
@@ -51,10 +75,10 @@ void Complex::println() {
 int main() {
 	Complex *p1 = new Complex(1, 1);
 	Complex *p2 = new Complex(4, -2);
-	Complex *p3 = new Complex(0, 0);
+	Complex *p3 = new Complex(4, 2);
 	p1->println();
 	p2->println();
-	*p3 = *p1 + *p2 + *p1;
+	*p3 += *p1 + *p2 + *p1;
 	p3->println();
 	
 	return 0;
