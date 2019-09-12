@@ -1,103 +1,61 @@
 #include <iostream>
 
-class Marine {
-	int hp;
-	int coordX, coordY;
-	int damage;
-	bool isDead;
+class Complex {
+	double real, img;
+	
 public:
-	Marine();
-	Marine(int x, int y);
-	~Marine();
-	
-	int attack();
-	void beAttacked(int attackedDamage);
-	void move(int x, int y);
-	
-	void showStatus();
+	Complex(double real, double img);
+	Complex operator+(const Complex &c);
+	Complex operator-(const Complex &c);
+	Complex operator*(const Complex &c);
+	Complex operator/(const Complex &c);
+	Complex& operator=(const Complex &c);
+	void println();
 };
 
+Complex::Complex(double real, double img) : real(real), img(img) {}
 
-Marine::Marine() {
-	hp = 50;
-	coordX = coordY = 0;
-	damage = 5;
-	isDead = false;
+Complex Complex::operator+(const Complex &c) {
+	Complex temp(real + c.real, img + c.img);
+	return temp;
 }
-Marine::Marine(int x, int y) {
-	hp = 50;
-	coordX = x;
-	coordY = y;
-	damage = 5;
-	isDead = false;
+Complex Complex::operator-(const Complex &c) {
+	Complex temp(real - c.real, img + c.img);
+	return temp;
 }
-Marine::~Marine() {
-	std::cout << "Marine Deleted!" << std::endl;
+Complex Complex::operator*(const Complex &c) {
+	Complex temp(real * c.real - img * c.img, real * c.img + img * c.real);
+	return temp;
 }
-
-void Marine::move(int x, int y) {
-	coordX = x;
-	coordY = y;
+Complex Complex::operator/(const Complex &c) {
+	Complex temp((real * c.real + img * c.img) / (c.real * c.real + c.img * c.img),
+    (img * c.real - real * c.img) / (c.real * c.real + c.img * c.img));
+	return temp;
 }
-int Marine::attack() {
-	return damage;
-}
-void Marine::beAttacked(int attackedDamage) {
-	if (!isDead) {
-		hp -= attackedDamage;
-		if (hp <= 0) {
-			isDead = true;
-			hp = 0;
-		}
-	} else {
-		std::cout << "Already Dead" << std::endl;
-	}
-}
-void Marine::showStatus() {
-	std::cout << "====================================================" << std::endl;
-	std::cout << "HP : " << hp << std::endl;
-	std::cout << "Coordinate : (" << coordX << ", " << coordY << ")" << std::endl;
-	std::cout << "Damage : " << damage << std::endl;
-	std::cout << "====================================================" << std::endl;
+Complex& Complex::operator=(const Complex &c) {
+	real = c.real;
+	img = c.img;
+	return *this;
 }
 
-void test1() {
-	/* This is first method to make object. 
-	   Dynamic allocation.
-	   Save object to heap of memory. */
-	Marine* marine1 = new Marine(1, 1);
-	Marine* marine2 = new Marine(3, 3);
-	
-	marine1->showStatus();
-	marine2->showStatus();
-	
-	marine1->move(0, 0);
-	marine1->beAttacked(marine2->attack());
-	
-	marine1->showStatus();
-	marine2->showStatus();
-}
 
-void test2() {
-	/* This is second method to make object. 
-	   Static allocation.
-	   Save object to stack of memory.
-	   If function ends, objects will be deleted. */
-	Marine marine1(1, 1);
-	Marine marine2(3, 3);
-	
-	marine1.showStatus();
-	marine2.showStatus();
-	
-	marine1.move(0, 0);
-	marine1.beAttacked(marine2.attack());
-	
-	marine1.showStatus();
-	marine2.showStatus();
+void Complex::println() {
+	if (img > 0)
+		std::cout << real << "+" << img << "i" << std::endl;
+	else if (img == 0)
+		std::cout << real <<std::endl;
+	else
+		std::cout << real << img << "i" << std::endl;
 }
 
 int main() {
-	test1();
-	// test2();
+	Complex *p1 = new Complex(1, 1);
+	Complex *p2 = new Complex(4, -2);
+	Complex *p3 = new Complex(0, 0);
+	p1->println();
+	p2->println();
+	*p3 = *p1 + *p2 + *p1;
+	p3->println();
+	
 	return 0;
 }
