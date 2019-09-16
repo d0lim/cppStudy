@@ -1,17 +1,13 @@
 #include <iostream>
-#include <string>
 
-template <typename T>
-T max(T& a, T& b) {
-	return a > b ? a : b;
+template <typename T, int num>
+T addNum(T t) {
+	return t + num;
 }
 
 int main() {
-	int a = 1, b = 2;
-	std::cout << "Max (" << a << "," << b << ") ? : " << max(a, b) << std::endl;
-	
-	std::string s = "hello", t = "world";
-	std::cout << "Max (" << s << "," << t << ") ? : " << max(s, t) << std::endl;
+	double x = 3.5;
+	std::cout << "x : " << addNum<double, 5>(x) << std::endl;
 	
 	return 0;
 }
